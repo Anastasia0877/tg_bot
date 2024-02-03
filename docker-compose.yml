@@ -1,0 +1,30 @@
+version: '3.7'
+services:
+    db:
+        container_name: 'bot_postgres'
+        image: 'postgres:15'
+        network_mode: bridge
+        restart: always
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+        environment:
+            POSTGRES_USER: ${DB__USER:-user}
+            POSTGRES_PASSWORD: ${DB__PASSWORD:-password}
+            POSTGRES_DB: ${DB__NAME:-postgres}
+            POSTGRES_PORT: ${DB__PORT:-5432}
+
+    bot:
+        build: .
+        network_mode: bridge
+        stop_signal: SIGINT
+        command: python __main__.py
+        depends_on:
+            - db
+        volumes:
+            - ./:/app
+        env_file:
+            - .env
+        restart: always
+
+volumes:
+    postgres_data:
