@@ -14,11 +14,15 @@
 
 Після заміни даних та заливу бота, відкриваємо його папку, у якій знаходиться файл `docker-compose.yml`
 
-Запускаємо команду ```shell
-docker-compose up --build```
+Запускаємо команду 
+```shell
+docker-compose up --build
+```
 
-Після чого підвантажуємо міграцію до БД ```shell
-docker-compose exec bot alembic upgrade head```
+Після чого підвантажуємо міграцію до БД 
+```shell
+docker-compose exec bot alembic upgrade head
+```
 
 
 ### Адміна
